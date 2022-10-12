@@ -1,0 +1,317 @@
+Ad_user,Ad_Pass=["LUCKY@#2"],["gla@12"]
+L_user,L_Pass=["NURUV@"],["nkp@12"]
+Items_sec=["Electronics","Grocery","Fashion"]
+Items=[["WASHING MACHINE\t","MOBILE PHONE\t","T.V.\t\t","A.C.\t\t","COMPUTER PERIPHERALS"],["RICE\t\t  ","PULSES\t\t","REPPELANTS\t\t","HOUSING\t\t   ","PACKAGED ITEMS\t"],["KID'S WEAR\t ","WOMEN'S WEAR  \t ","MEN'S WEAR\t","NIGHT WEAR\t","ACCESSORIES\t"]]
+Price=[[5000,4200,7000,25000,8000],[90,110,70,150,40],[4500,12500,2500,1250,250]]
+Stocks=[[25,12,14,52,45],[10,12,14,25,54],[12,19,57,84,10]]
+Order,Total,T_items=[[]],[[]],[[]]
+ad_or,ad_sto=[[]],[[]]
+ca,ad,total=-1,0,0
+while(1):
+    print("=========================================================================================")
+    print("\t\t\t\tWELCOME TO DASHBOARD")
+    print("=========================================================================================")
+    i=(input("Press 1. for ADMIN Login Interface \t\t\t\tPress *1 for Admin Signup\nPress 2. for USER Login Interface \t\t\t\tPress *2 for USER Signup\n\nPress 3. to Exit\n"))
+    print("=========================================================================================")
+    if(i=='1'):
+        print("=========================================================================================")
+        print("\t\tWelcome To Admin Interface\t(Press 0 to go back or Press 9 for Dashboard)")
+        print("=========================================================================================")
+        a=(input("LOGIN REQUIRED\nEnter Your Login-Id\n")).upper()
+        print("=========================================================================================")
+        if(a=='0'):      
+            continue
+        bs=input("Enter Your Password\t\t(Please Note that Your Password is CASE-SENSITIVE\n")
+        print("=========================================================================================")
+        for i in range(len(Ad_user)):
+            if(Ad_user[i]==a and bs==Ad_Pass[i]):
+                print("Logged in Successfully")
+                a=1
+                se=i
+                print(se)
+                ad_or.append([]),ad_sto.append([])
+                while(a==1):
+                    print("=========================================================================================")
+                    print("\t\t\t\tADMIN INTERFACE")
+                    print("=========================================================================================")
+                    q=int(input("What to Want to Do\nPress 1. for VIEW STOCKS\nPress 2. for STOCKS MANAGEMENT\nPress 3. to ADDING ITEMS\nPress 4. to ADDING ITEM_SECTION\nPress 5. to VIEW ORDERS\n"))
+                    print("=========================================================================================")
+                    if(q==9 or q==0):
+                        break
+                    elif(q==1):
+                        print("\t\t\tWelcome To STOCKS window\n\t\t\tAvailable Stocks_Items Are:\n")
+                        for i in range (len(Items_sec)):
+                            print("=========================================================================================")
+                            print(Items_sec[i])
+                            print("=========================================================================================")
+                            for j in range(len(Items[i])):
+                                print(Items[i][j],'\t',Stocks[i][j],'\t',Price[i][j],"/-")
+                            if(len(Items[i])==0):
+                               print("No Items To Show\n")
+                        print("=========================================================================================")
+                        ad=input("Want to Continue YES - Press 'y' or 'Y'\n")
+                        if(ad=="y" or ad=='Y'):
+                            continue
+                        else:
+                            print("=========================================================================================")
+                            print("THANK YOU")
+                            print("=========================================================================================")
+                            break
+                    elif(q==2):
+                        print("\t\t\t\tWelcome To STOCKS MANAGEMENT")
+                        print("=========================================================================================")
+                        print("Select for what Changes is to be made\nPress 1. for STOCKS MODIFICAION\nPress 2. for PRICE MODIFICATION\n")
+                        pr=int(input())
+                        if(pr==0):
+                            continue
+                        elif(pr==1):
+                            print("=========================================================================================")
+                            print("Select Section From Below Options\n")
+                            for i in range (len(Items_sec)):
+                                print(Items_sec[i])
+                            i=(int(input()))
+                            print("=========================================================================================")
+                            print("Select From Given Items of section",Items_sec[i-1],'\n')
+                            if(i>=1 and i<=len(Items_sec)):
+                                for j in range(len(Items[i-1])):
+                                    print(Items[i-1][j],'\t', Stocks[i-1][j])
+                                S=int(input())
+                                if(S>=1 and S<=len(Items[i-1])):
+                                    print("=========================================================================================")
+                                    print("Available Stock for",Items[i-1][S-1],'is',Stocks[i-1][S-1])
+                                    Q=int(input("Enter the Quantity You want to Add more\n"))
+                                    Stocks[i-1][S-1]+=Q
+                                    print(Items[i-1][S-1],'stocks is changed to',Stocks[i-1][S-1])
+                                elif(S==0):
+                                    continue
+                                elif(S==9):
+                                    break
+                            elif(i==0):
+                                continue
+                            elif(i==9):
+                                break
+                        elif(pr==2):
+                            print("\t\tSelect Section From Below Options")
+                            for i in range (len(Items_sec)):
+                                print(Items_sec[i])
+                            i=int(input())
+                            print("=========================================================================================")
+                            print("\t\tSelect From Given Items of section",Items_sec[i-1],'\n')
+                            if(i>=1 and i<=len(Items_sec)):
+                                for j in range(len(Items[i-1])):
+                                    print(Items[i-1][j],'\t', Price[i-1][j],"/-")
+                                S=int(input())
+                                if(S>=1 and S<=len(Items[i-1])):
+                                    print("=========================================================================================")
+                                    print("Current Price of ",Items[i-1][S-1],'is',Price[i-1][S-1])
+                                    Q=int(input("Enter the new Price"))
+                                    Price[i-1][S-1]=Q
+                                    print(Items[i-1][S-1],'Price is changed to',Price[i-1][S-1])
+                                elif(S==0):
+                                    continue
+                                elif(S==9):
+                                    break
+                            elif(i==0):
+                                continue
+                            elif(i==9):
+                                break
+                    elif(q==3):
+                        print("=========================================================================================")
+                        print("\t\tSelect Section From Below Options")
+                        while(1):
+                            for i in range (len(Items_sec)):
+                                print(Items_sec[i])
+                            ia=int(input())
+                            if(ia==0):
+                                continue
+                            elif(ia==9):
+                                break
+                            aa,b,c=input("Enter The Name of Item you want to Add"),float(input("Enter its Price")),int(input("Enter The Stocks Available For It"))
+                            aaa=aa.upper()
+                            if(ia>=1 and ia<=len(Items[0])):
+                               Items[ia-1].append(aaa),Price[ia-1].append(b),Stocks[ia-1].append(c)
+                               print("Data Updated")
+                               zz=input("Want to Add More\nPress 'y' or 'Y' for Yes ")
+                               if(zz=='y' or zz=='Y'):
+                                   continue
+                               else:
+                                   break
+                    elif(q==5):
+                        print("=========================================================================================")
+                        print("\t\t\t\tVIEW ORDERS\n")
+                        l=len(ad_or[se])
+                        if(ad_or[se]==[]):
+                            print("No any Order Yet Received\n")
+                        for i in range(l):
+                            print(ad_or[se][i],'\t\t',ad_sto[se][i])
+                        print("=========================================================================================")
+                    elif(q==4):
+                        sec=input("Enter The Name of New Section")
+                        ti=sec.title()
+                        Items_sec.append(ti)
+                        Price.append([]),Items.append([]),Stocks.append([])
+                        
+    elif(i=='*1' or i=='*2'):
+        print("=========================================================================================")
+        a,d=(input("Enter Your New Username ")).upper(),0
+        if(i=='*1'):
+            for ii in range(len(Ad_user)):
+                if(a==Ad_user[ii]):
+                    d=d+1
+        elif(i=='*2'):
+            for ii in range(len(L_user)):
+                if(a==L_user[ii]):
+                    d=d+1
+        if(d>=1):
+            print("This Username is Already taken please Use different\n")
+            continue
+        b,c=input("Enter Your New Password "),input("Confirm Your Password ")
+        if(b==c):
+            if(i=='*1'):
+                Ad_user.append(a),Ad_Pass.append(b)
+            elif(i=='*2'):
+                L_user.append(a),L_Pass.append(b)
+                Order.append([]),Total.append([]),T_items.append([])
+            print("=========================================================================================")
+            print("You are now successfully Registered")
+            print("=========================================================================================")
+        else:
+            print("Password Mismatched")
+    elif(i=='3'):
+        print("=========================================================================================")
+        print("You are Successfully Exit-ed")
+        print("Thank You for Using our App")
+        print("=========================================================================================")
+        break
+    elif(i=='2'):
+        print("=========================================================================================")
+        print("\t\tWelcome To USER Interface\t(Press 0 to go back or Press 9 for Dashboard)")
+        print("=========================================================================================")
+        a=(input("LOGIN REQUIRED\nEnter Your Login-Id\n")).upper()
+        print("=========================================================================================")
+        if(a=='0' or a=='9'):
+            continue
+        bs=input("Enter Your Password\t\t(Please Note that Yoiur Password is CASE-SENSITIVE\n")
+        print("=========================================================================================")
+        for i in range(len(L_user)):
+            if(L_user[i]==a and bs==L_Pass[i]):
+                print("Logged in Successfully")
+                aa=i
+                print(aa)
+                a=1
+                while(a==1):
+                    print("=========================================================================================")
+                    print("\t\t\t\tUSER INTERFACE")
+                    print("=========================================================================================")
+                    q=int(input("What to Want to Do\nPress 1. for VIEWING MENU\nPress 2. for ORDER ITEMS\nPress 3. to GO TO CART\n"))
+                    print("=========================================================================================")
+                    if(q==9 or q==0):
+                        break
+                    elif(q==1):
+                        print("\t\t\tMENU")
+                        for i in range (len(Items_sec)):
+                            print("=========================================================================================")
+                            print(Items_sec[i])
+                            print("=========================================================================================")
+                            for j in range(len(Items[i])):
+                                if(Stocks[i][j]==0):
+                                    continue
+                                else:
+                                    print(Items[i][j],'\t',Price[i][j],"/-")
+                            if(len(Items[i])==0):
+                                print("=========================================================================================")
+                                print("No Items To Show\n")
+                        print("=========================================================================================")
+                        ad=int(input("**Press 1 to go to ORDER PANEL\n"))
+                        if(ad==0):
+                            continue
+                        elif(ad==9):
+                            print("=========================================================================================")
+                            print("THANK YOU")
+                            print("=========================================================================================")
+                            break
+                    if(q==2 or ad==1):
+                        print("\t\t\t\t WELCOME TO ORDER PANEL")
+                        ye='1'
+                        while(ye=='1'):
+                            print("=========================================================================================")
+                            print("Choose the SECTION from below\n")
+                            print("=========================================================================================")
+                            for i in range (len(Items_sec)):
+                                    print(Items_sec[i])
+                            i=int(input())
+                            print("=========================================================================================")
+                            print("Select From Given Items of section" )
+                            print("=========================================================================================")
+                            if(i>=1 and i<=len(Items_sec)):
+                                for j in range(len(Items[i-1])):
+                                    print(Items[i-1][j],'\t',Price[i-1][j])
+                                S=int(input())
+                                if(S>=1 and S<=len(Items[i-1])):
+                                    print("=========================================================================================")
+                                    print("AVAILABLE STOCKS FOR",Items[i-1][S-1],'=',Stocks[i-1][S-1])
+                                    Qua=int(input("Enter the Quantity You want to Add = "))
+                                    if(Qua<=Stocks[i-1][S-1]):
+                                        print("=========================================================================================")
+                                        print("\t\t\t\tAvailable Seller for this Item")
+                                        for i in range(len(Ad_user)):
+                                            print(Ad_user[i])
+                                        print("=========================================================================================")
+                                        se=int(input("Enter your Choice"))
+                                        print("=========================================================================================")
+                                        print("Items Added for",Items[i-1][S-1],'is',Qua)
+                                        Order[aa].append(Items[i-1][S-1])
+                                        Total[aa].append((Price[i-1][S-1])*Qua),T_items[aa].append(Qua)
+                                        Stocks[i-1][S-1]-=Qua
+                                        ad_or[se-1].append(Items[i-1][S-1]),ad_sto[se-1].append(Qua)
+                                    else:
+                                        print("=========================================================================================")
+                                        print("Stocks UNAVAILABLE")
+                                        continue
+                                    print("=========================================================================================")
+                                    ye=input("Want To add more items:\nYES(1)\nPress any key to continue to CART\n")
+                                    if ye!='1':
+                                        car=1
+                                        break
+                                elif(S==0):
+                                    continue
+                                elif(S==9):
+                                    break
+                                else:
+                                    print("=========================================================================================")
+                                    print("WRONG INPUT")
+                                    print("=========================================================================================")
+                                    continue
+                            elif(i==0):
+                                break
+                            elif(i==9):
+                                break
+                            else:
+                                print("=========================================================================================")
+                                print("WRONG INPUT")
+                                print("=========================================================================================")
+                                continue
+                    if(q==3 or car==1):
+                        print("=========================================================================================")
+                        print("\t\t\tCART\n")
+                        print("=========================================================================================")
+                        if(Order==[]):
+                            print("=========================================================================================")
+                            print("\nNo any Order Yet Received\n")
+                        print("=========================================================================================")
+                        print("S No.\t\t\tItems\t\t\tQuantity\t\t\tPrice")
+                        print("=========================================================================================")
+                        for i in range(len(Order[aa])):
+                            print("||",i+1,'\t||\t',Order[aa][i],"\t||\t",T_items[aa][i],"\t||\t",Total[aa][i],"/- ",end="||\n")
+                            total=total+Total[aa][i]
+                        print("=========================================================================================")
+                        print("TOTAL=\t\t\t",total,"/-")
+                        print("=========================================================================================")
+                        print("Returning To Dashboard")
+                        break
+                    else:
+                        print("=========================================================================================")
+                        print("WRONG INPUT")
+                        print("=========================================================================================")
+                        continue
+
